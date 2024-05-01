@@ -44,7 +44,7 @@ const onChangeOfInputField = (e) => {
         targetEle.classList.remove('error');
     } else if (!targetEle.value) {
         inputError.removeAttribute('hidden');
-        // targetEle.classList.add('error');
+        targetEle.classList.add('error');
         if (invalidInput) invalidInput.setAttribute('hidden', '');
     }
 };
