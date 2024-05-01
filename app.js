@@ -25,20 +25,26 @@ const onChangeOfInputField = (e) => {
     const inputWrapper = targetEle.closest('.support-form__content_item');
     const inputError = inputWrapper.querySelector('.supprt-form__content_error');
     const invalidInput = inputWrapper.querySelector('.invalid-input');
-    // validation of email
-    if (targetEle.id === 'email' && targetEle.value && (/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(targetEle.value))) {
-        //handle valid e-mail
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    const phoneRegex =  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (targetEle.id === 'phone') targetEle.value = targetEle.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+    // validation of email and phone num
+    if ((targetEle.id === 'email' && targetEle.value && (emailRegex.test(targetEle.value))) || targetEle.id === 'phone' && targetEle.value && targetEle.value.match(phoneRegex)) {
+        //handle valid e-mail and phone num
         if (invalidInput) invalidInput.setAttribute('hidden', '');
-        console.log('valid email');
-    } else if (targetEle.value) {
-        //handle invalid e-mail
+        targetEle.classList.remove('error');
+    } else if ((targetEle.id === 'email' || targetEle.id === 'phone') && targetEle.value) {
+        //handle invalid e-mail and phone num
         if (invalidInput) invalidInput.removeAttribute('hidden');
-        console.log('invalid email');
+        targetEle.classList.add('error');
     }
     // if value exists in inp field hide error meesage if shown
-    if (!inputError.hasAttribute('hidden')) inputError.setAttribute('hidden', '');
-    else if (!targetEle.value) {
+    if (targetEle.value && !inputError.hasAttribute('hidden')) {
+        inputError.setAttribute('hidden', '');
+        targetEle.classList.remove('error');
+    } else if (!targetEle.value) {
         inputError.removeAttribute('hidden');
+        // targetEle.classList.add('error');
         if (invalidInput) invalidInput.setAttribute('hidden', '');
     }
 };
@@ -50,8 +56,10 @@ const fieldCheck = () => {
         const inputError = inputWrapper.querySelector('.supprt-form__content_error');
         if (!(ele.value) || ele.value === 'Select') {
             if (inputError) inputError.removeAttribute('hidden');
+            ele.classList.add('error');
         } else {
             if (inputError) inputError.setAttribute('hidden', '');
+            ele.classList.remove('error');
         }
     });
 };
