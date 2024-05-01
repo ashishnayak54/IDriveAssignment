@@ -1,12 +1,10 @@
 // Hamburger Logic
-
 function toggleMenu() {
     var menu = document.querySelector('.mobile-menu');
     menu.classList.toggle('open');
 }
 
 // Form Validation
-
 const handleFormClick = (event) => {
     const prevActiveEle = document.querySelector('.support-form_head .active');
     const targetEle = event.target;
@@ -19,7 +17,6 @@ document.querySelectorAll('.support-form_head div').forEach(ele => {
 });
 
 // Input Fields Validation
-
 const onChangeOfInputField = (e) => {
     const targetEle = e.target;
     const inputWrapper = targetEle.closest('.support-form__content_item');
@@ -67,6 +64,7 @@ const fieldCheck = () => {
 const supportBtnClick = (e) => {
     e.preventDefault();
     fieldCheck();
+    // hit BE API to store data
 };
 
 // Binding event on change of input field
@@ -75,3 +73,19 @@ document.querySelectorAll('.input_field').forEach(ele => {
 });
 // Event binding on click of Report Tech Support button
 document.querySelector('.support-form__button').addEventListener('click', supportBtnClick);
+
+// footer accordion js
+document.addEventListener("DOMContentLoaded", () => {
+    var accordions = document.getElementsByClassName("accordion");
+    Array.from(accordions).forEach((accordion) => {
+        accordion.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    });
+});
