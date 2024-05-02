@@ -591,6 +591,11 @@ label {
   border-radius: 5px;
 }
 
+.resources-faqs svg {
+  width: 40px;
+  height: 40px;
+}
+
 .resources h3,
 .faqs h3 {
   border-bottom: 1px dashed #b2c8d6;
@@ -604,7 +609,8 @@ label {
   padding: 30px 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  row-gap: 50px;
+  column-gap: 20px;
 }
 
 .resources-content span,
@@ -626,25 +632,34 @@ label {
   flex-wrap: wrap;
 }
 
+@media (max-width: 500px) {
+  .resources-content > div, .faqs-content > div {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .resources-content span,
+  .faqs-content span {
+    padding-left: 0;
+  }
+}
+
 @media screen and (min-width: 768px) and (max-width: 1300px) {
   .resources-faqs {
     margin: 40px 24px;
   }
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 960px) {
   .resources-faqs {
     grid-template-columns: 1fr 1fr;
-    margin: 40px auto;
   }
 }
 
-object {
-  display: block;
-  width: 0;
-  height: 0;
-  visibility: hidden;
-  overflow: hidden;
+@media (min-width: 1300px) {
+  .resources-faqs {
+    margin: 40px auto;
+  }
 }
 
 /* footer styling */
@@ -666,10 +681,6 @@ footer {
 
 .footer-container.mobile .footer-section {
   margin-bottom: 10px;
-}
-
-.footer-mobile-logo {
-  margin-left: -37px;
 }
 
 .footer-container.mobile .accordion {
@@ -724,10 +735,6 @@ footer {
     gap: 20px;
     padding: 20px 24px;
   }
-}
-
-.footer-dekstop-logo {
-  margin-left: -25px;
 }
 
 .footer-container.desktop .row-wrap > div:last-child {
